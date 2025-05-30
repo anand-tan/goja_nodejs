@@ -4,7 +4,7 @@ import (
 	"bytes"
 
 	"github.com/dop251/goja"
-	"github.com/mugiliam/goja_nodejs/require"
+	"github.com/anand-tan/goja_nodejs/require"
 )
 
 const ModuleName = "util"
