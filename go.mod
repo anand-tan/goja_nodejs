@@ -1,4 +1,4 @@
-module github.com/mugiliam/goja_nodejs
+module github.com/anand-tan/goja_nodejs
 
 go 1.20
 
