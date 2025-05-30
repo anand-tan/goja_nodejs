@@ -2,8 +2,9 @@ package util
 
 import (
 	"bytes"
+
 	"github.com/dop251/goja"
-	"github.com/dop251/goja_nodejs/require"
+	"github.com/mugiliam/goja_nodejs/require"
 )
 
 const ModuleName = "util"
@@ -101,4 +102,13 @@ func New(runtime *goja.Runtime) *Util {
 
 func init() {
 	require.RegisterCoreModule(ModuleName, Require)
+}
+
+func SetGlobal(runtime *goja.Runtime) error {
+	util := New(runtime)
+
+	o := runtime.NewObject()
+	o.Set("format", util.js_format)
+	runtime.Set("util", o)
+	return nil
 }

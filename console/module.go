@@ -1,9 +1,11 @@
 package console
 
 import (
+	"fmt"
+
 	"github.com/dop251/goja"
-	"github.com/dop251/goja_nodejs/require"
-	"github.com/dop251/goja_nodejs/util"
+	"github.com/mugiliam/goja_nodejs/require"
+	"github.com/mugiliam/goja_nodejs/util"
 )
 
 const ModuleName = "console"
@@ -69,4 +71,29 @@ func Enable(runtime *goja.Runtime) {
 
 func init() {
 	require.RegisterCoreModule(ModuleName, Require)
+}
+
+func SetGlobal(runtime *goja.Runtime, printer Printer) error {
+	p := printer
+	if p == nil {
+		p = defaultStdPrinter
+	}
+	c := &Console{
+		runtime: runtime,
+		printer: p,
+	}
+
+	if u := runtime.Get("util"); u != nil {
+		c.util = u.ToObject(runtime)
+		o := runtime.NewObject()
+		o.Set("log", c.log(c.printer.Log))
+		o.Set("error", c.log(c.printer.Error))
+		o.Set("warn", c.log(c.printer.Warn))
+		o.Set("info", c.log(c.printer.Log))
+		o.Set("debug", c.log(c.printer.Log))
+		runtime.Set(ModuleName, o)
+	} else {
+		return fmt.Errorf("util module is not available in the runtime")
+	}
+	return nil
 }

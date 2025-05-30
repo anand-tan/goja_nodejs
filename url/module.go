@@ -2,7 +2,7 @@ package url
 
 import (
 	"github.com/dop251/goja"
-	"github.com/dop251/goja_nodejs/require"
+	"github.com/mugiliam/goja_nodejs/require"
 )
 
 const ModuleName = "url"

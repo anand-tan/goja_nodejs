@@ -5,8 +5,8 @@ import (
 	"testing"
 
 	"github.com/dop251/goja"
-	"github.com/dop251/goja_nodejs/console"
-	"github.com/dop251/goja_nodejs/require"
+	"github.com/mugiliam/goja_nodejs/console"
+	"github.com/mugiliam/goja_nodejs/require"
 )
 
 func createVM() *goja.Runtime {
